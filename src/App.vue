@@ -1,19 +1,33 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <button @click="getHello">Get Hello</button>
+    <p>{{ responseMessage }}</p>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import axios from 'axios';
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  data() {
+    return {
+      responseMessage: ''
+    };
+  },
+  methods: {
+    getHello() {
+      // 发送GET请求到后端的"/hello"路径
+      axios.get('http://localhost:8080/hello') // 请替换为你的后端地址和端口
+        .then(response => {
+          this.responseMessage = response.data;
+        })
+        .catch(error => {
+          this.responseMessage = error;
+          console.error('Error fetching hello:', error);
+        });
+    }
   }
-}
+};
 </script>
 
 <style>
