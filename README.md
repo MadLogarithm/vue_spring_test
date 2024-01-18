@@ -1,5 +1,7 @@
 # vue_spring_test
 
+Just for backend interface test.
+
 ## Project setup
 ```
 npm install
